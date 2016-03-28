@@ -7,7 +7,10 @@ License: MIT
 LazyData: true
 Depends:
     R (>= 3.2.2),
-    dplyr
+    dplyr,
+    ggplot2,
+    lmtest,
+    sandwich
 Imports:
     dplyr,
     ggplot2,
