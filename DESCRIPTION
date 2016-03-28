@@ -8,11 +8,15 @@ LazyData: true
 Depends:
     R (>= 3.2.2),
     dplyr,
+    tidyr,
+    broom,
     ggplot2,
     lmtest,
     sandwich
 Imports:
     dplyr,
+    tidyr,
+    broom,
     ggplot2,
     lmtest,
     sandwich,
