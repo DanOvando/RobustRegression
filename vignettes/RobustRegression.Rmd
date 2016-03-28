@@ -15,12 +15,6 @@ Let's start by running a simple linear regression using the `iris` dataset inclu
 
 ```{r load things, message=F, warning=F}
 library(RobustRegression)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(broom)
-library(sandwich)
-library(lmtest)
 library(stargazer)
 
 data("iris")
