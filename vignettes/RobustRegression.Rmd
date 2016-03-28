@@ -70,4 +70,4 @@ stargazer(regression$model, type = 'html',
 
 ```
 
-As we would expect, using `RobustRegression` doesn't change our estimated model coefficients at all, but does reduce our standard errors. 
+As we would expect, using `RobustRegression` doesn't change our estimated model coefficients at all, but accounting for clusters and heteroskedasticity does substantially change the standard errors and p values
