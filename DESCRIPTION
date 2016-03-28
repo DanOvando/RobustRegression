@@ -6,7 +6,8 @@ Description: This package allows for running heteroskedastic robust standard err
 License: MIT
 LazyData: true
 Depends:
-    R (>= 3.2.2)
+    R (>= 3.2.2),
+    dplyr
 Imports:
     dplyr,
     ggplot2,
