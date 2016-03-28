@@ -2,41 +2,26 @@
 #'
 #' \code{RobustRegression} runs a robust regression with
 #' heteroskedastic robust standard errors
-#' @param model a linear regression object
-#' @param dat the data used in the linear regression model
-#' @param cluster_var a character indicating variables to cluster erros by
-#' @return A list object with components model - the regression object, TidyModel,
+#' @param model a linear regression object of the form lm(a ~ b)
+#' @param dat the data frame object used in the linear regression model
+#' @param cluster_var a character indicating variables to cluster errors by
+#' @return A list object with components: model - the regression object, TidyModel,
 #'  a cleaned up version of the model, GlanceModel - tidy summary of the model,
 #'  AugModel -  the original data with some augmented things
+#' @example
+#' data('iris')
+#' regression <-  RobustRegression(model = lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris),
+#' dat = iris, cluster_var = 'Species')
 
 RobustRegression<- function(model,dat,cluster_var = 'None')
 {
-  ##Created by Dan Ovando
-  ## April 14 2015
-
-  ## This function calculates heteroskedastic robust standard errors in the manner of the 'robust'
-  #option in STATA. Robust SEs and associated Variance-Covariance matrix are stored in the model
-  # Tidy and summary versions of results are produced and stored
-  #Outputs:
-  # model: The regression object
-  # TidyModel: A cleaned up version of the mode
-  # GlanceModel: summary statistics of the model
-  # AugModel: dat with augmented statistics
-
-  # library(sandwich,quietly=T)
-#   library(lmtest,quietly=T)
-#   library(broom,quietly=T)
-#   library(tidyr,quietly=T)
-#   library(dplyr,quietly=T)
-#   library(zoo,quietly=T)
 
   model$VCOV<- vcovHC(model,type='HC1')
 
   if (cluster_var !='None')
   {
-    model$VCOV<- ClusteredVCOV(model,data=dat,cluster=cluster_var)
+    model$VCOV<- ClusteredVCOV(model,dat = dat, cluster = cluster_var)
   }
-
 
   SEs<- data.frame(t(sqrt(diag(model$VCOV))),stringsAsFactors=F) %>% gather('variable','RobustSE')
 
@@ -74,7 +59,6 @@ RobustRegression<- function(model,dat,cluster_var = 'None')
   TidyModel$variable <- reorder(TidyModel$variable, TidyModel$RobustPval)
 
   TidyModel$ShortPval<- pmin(TidyModel$RobustPval,0.2)
-
 
   RegPlot<- (ggplot(data=TidyModel,aes(x=variable,y=estimate,fill=ShortPval))+
                geom_bar(position='dodge',stat='identity',color='black')+

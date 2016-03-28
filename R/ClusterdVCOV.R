@@ -1,20 +1,23 @@
 #' Clustered VCOV matrix
 #'
 #' \code{ClusteredVCOV} produced clusted VCOV matrix
-#'
+#' @param model the model object passed
+#' @param dat the raw data used in the model
+#' @param cluster a character designating the variable to cluster errors by
 
-ClusteredVCOV<-function(model,data,cluster){
-#   library(sandwich, quietly = TRUE)
-#   library(lmtest, quietly = TRUE)
+ClusteredVCOV<-function(model,dat,cluster){
+
   #calculate degree of freedom adjustment
 
   Dropped<- as.numeric(model$na.action)
 
-  Rows<- 1:dim(data)[1]
+  Rows<- 1:dim(dat)[1]
 
-  Used<- data[!(Rows %in% Dropped),]
+  Used<- dat[!(Rows %in% Dropped),]
 
   ClusterId<- Used[,cluster]
+
+  ClusterId<- as.matrix(select_(Used,cluster))
 
   M <- length(unique(ClusterId))
   N <- length(ClusterId)

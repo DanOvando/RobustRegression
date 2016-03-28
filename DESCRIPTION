@@ -1,11 +1,11 @@
 Package: RobustRegression
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: Run Robust and Clustered Regressions in R
+Version: 1.0
+Authors@R: person("Dan", "Ovando", email = "dovando@bren.ucsb.edu", role = c("aut", "cre"))
+Description: This package allows for running heteroskedastic robust standard errors, as well as clustered standard errors. Results are identical to using 'robust' and 'cluster' options in STATA.
 Depends:
     R (>= 3.2.2)
-License: What license is it under?
+License: MIT
 LazyData: true
 Imports:
     dplyr,
@@ -15,6 +15,7 @@ Imports:
     zoo
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    stargazer
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

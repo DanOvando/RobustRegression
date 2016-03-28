@@ -4,7 +4,14 @@
 \alias{ClusteredVCOV}
 \title{Clustered VCOV matrix}
 \usage{
-ClusteredVCOV(model, data, cluster)
+ClusteredVCOV(model, dat, cluster)
+}
+\arguments{
+\item{model}{the model object passed}
+
+\item{dat}{the raw data used in the model}
+
+\item{cluster}{a character designating the variable to cluster errors by}
 }
 \description{
 \code{ClusteredVCOV} produced clusted VCOV matrix

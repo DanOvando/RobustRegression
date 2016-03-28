@@ -4,17 +4,17 @@
 \alias{RobustRegression}
 \title{Runs robust regression}
 \usage{
-RobustRegression(model, dat, cluster_var)
+RobustRegression(model, dat, cluster_var = "None")
 }
 \arguments{
-\item{model}{a linear regression object}
+\item{model}{a linear regression object of the form lm(a ~ b)}
 
-\item{dat}{the data used in the linear regression model}
+\item{dat}{the data frame object used in the linear regression model}
 
-\item{cluster_var}{a character indicating variables to cluster erros by}
+\item{cluster_var}{a character indicating variables to cluster errors by}
 }
 \value{
-A list object with components Model - the regression object, TidyModel,
+A list object with components: model - the regression object, TidyModel,
  a cleaned up version of the model, GlanceModel - tidy summary of the model,
  AugModel -  the original data with some augmented things
 }
