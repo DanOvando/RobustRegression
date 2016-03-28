@@ -7,11 +7,6 @@ License: MIT
 LazyData: true
 Depends:
     R (>= 3.2.2)
-    dplyr,
-    ggplot2,
-    lmtest,
-    sandwich,
-    zoo
 Imports:
     dplyr,
     ggplot2,
