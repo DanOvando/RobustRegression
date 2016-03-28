@@ -22,4 +22,9 @@ A list object with components: model - the regression object, TidyModel,
 \code{RobustRegression} runs a robust regression with
 heteroskedastic robust standard errors
 }
+\examples{
+data('iris')
+regression <-  RobustRegression(model = lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris),
+dat = iris, cluster_var = 'Species')
+}
 
