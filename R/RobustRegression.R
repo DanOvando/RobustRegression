@@ -8,10 +8,11 @@
 #' @return A list object with components: model - the regression object, TidyModel,
 #'  a cleaned up version of the model, GlanceModel - tidy summary of the model,
 #'  AugModel -  the original data with some augmented things
-#' @example
+#' @examples
 #' data('iris')
 #' regression <-  RobustRegression(model = lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris),
 #' dat = iris, cluster_var = 'Species')
+#' @export
 
 RobustRegression<- function(model,dat,cluster_var = 'None')
 {

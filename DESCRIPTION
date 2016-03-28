@@ -7,6 +7,8 @@ Depends:
     R (>= 3.2.2)
 License: MIT
 LazyData: true
+Depends:
+    dplyr
 Imports:
     dplyr,
     ggplot2,

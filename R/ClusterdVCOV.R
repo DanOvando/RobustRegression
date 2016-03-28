@@ -4,6 +4,7 @@
 #' @param model the model object passed
 #' @param dat the raw data used in the model
 #' @param cluster a character designating the variable to cluster errors by
+#' @export
 
 ClusteredVCOV<-function(model,dat,cluster){
 
