@@ -3,10 +3,15 @@ Title: Run Robust and Clustered Regressions in R
 Version: 1.0
 Authors@R: person("Dan", "Ovando", email = "dovando@bren.ucsb.edu", role = c("aut", "cre"))
 Description: This package allows for running heteroskedastic robust standard errors, as well as clustered standard errors. Results are identical to using 'robust' and 'cluster' options in STATA.
-Depends:
-    R (>= 3.2.2)
 License: MIT
 LazyData: true
+Depends:
+    R (>= 3.2.2)
+    dplyr,
+    ggplot2,
+    lmtest,
+    sandwich,
+    zoo
 Imports:
     dplyr,
     ggplot2,
