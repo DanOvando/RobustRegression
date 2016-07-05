@@ -14,7 +14,7 @@
 #' dat = iris, cluster_var = 'Species')
 #' @export
 
-RobustRegression<- function(model,dat,cluster_var = 'None')
+RobustRegression<- function(model,dat,cluster_var = 'None', make_plot = F)
 {
 
   model$VCOV<- vcovHC(model,type='HC1')
@@ -60,7 +60,7 @@ RobustRegression<- function(model,dat,cluster_var = 'None')
   TidyModel$variable <- reorder(TidyModel$variable, TidyModel$RobustPval)
 
   TidyModel$ShortPval<- pmin(TidyModel$RobustPval,0.2)
-
+ if (make_plot == T){
   RegPlot<- (ggplot(data=TidyModel,aes(x=variable,y=estimate,fill=ShortPval))+
                geom_bar(position='dodge',stat='identity',color='black')+
                scale_fill_gradient2(high='black',mid='gray99',low='red',midpoint=0.1,
@@ -70,7 +70,9 @@ RobustRegression<- function(model,dat,cluster_var = 'None')
                geom_errorbar(mapping=aes(ymin=estimate-1.96*RobustSE,ymax=estimate+1.96*RobustSE))+
                xlab('Variable')+
                ylab(paste('Marginal Effect on ',names(model$model)[1],sep='')))
-
+ } else{
+  RegPlot <- NA
+}
   TidyModel$ShortPval<- NULL
 
   TCrit<-(qt(c(0.025,0.975),df=model$df.residual)[2])
