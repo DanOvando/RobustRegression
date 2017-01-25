@@ -59,6 +59,7 @@ To get our robust standard errors, we do
 lmtest::coeftest(reg,  sandwich::vcovHC(reg, "HC1"))
 
 ```
+This is saying extract the coefficients, using a variance-covariance matrix with "HC1" corrected standard errors. 
 And *voila*, we have robust standard errors. 
 
 I've gone through and added this and some other functionality into a package called `RobustRegression`
