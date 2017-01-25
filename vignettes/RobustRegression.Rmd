@@ -33,7 +33,35 @@ In STATA, we could accomplish this through
 
 `regress Sepal.Length Sepal.Width Petal.Length i.Species, robust cluster(Species)`
 
-In R, we will instead use the `RobustRegression` function:
+
+To do this in R, you'll need two libraries
+
+```{r}
+library(lmtest)
+library(sandwich)
+```
+
+We can now run our regression 
+
+```{r}
+reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris)
+
+summary(reg)
+
+```
+
+These are our standard std. errors. 
+
+To get our robust standard errors, we do 
+
+```{r}
+
+lmtest::coeftest(reg,  sandwich::vcovHC(reg, "HC1"))
+
+```
+And *voila*, we have robust standard errors. 
+
+I've gone through and added this and some other functionality into a package called `RobustRegression`
 
 ```{r run regression}
 regression <-  RobustRegression(model = lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris),
@@ -47,7 +75,7 @@ We simply specify a `model` in the same manner as we normally would. `RobustRegr
 
   * `regression$`
     * `model` is the standard model object produced by `lm`, except that an object called `model$RobustSEs` has been added that include the robust standard errors. Note that functions such as `summary` calculate things like p values and standard errors on the fly from the data, and so will not show robust standard errors if used
-    * `TidyModel` is a tidyed data frame with the model, containing the coefficients, standard standard errors, and various test statistics
+    * `TidyModel` is a tidyed data frame with the model, containing the coefficients, standard and robust standard errors, and various test statistics
     * `AugModel` is the original data frame used in the regression, with augmented variables such as fitted values
     * `GlanceModel` contains a tidyed data frame of model summary statistics, e.g. R^2^
     * `RegPlot` a plot of the regression coefficients
