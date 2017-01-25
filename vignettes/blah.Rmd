@@ -1,0 +1,40 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Example using heteroskedastic robust standard errors in R
+
+```{r}
+
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+library(car)
+
+data("iris")
+
+iris <- iris %>% 
+  as_data_frame()
+
+head(iris)
+
+iris_model <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris)
+
+summary(iris_model)
+
+coeftest(iris_model,  vcovHC(iris_model, "HC1"))
+
+
+# FTest = linearHypothesis(iris_model, c('Sepal.Width = 0', 'Petal.Length = 0'), white.adjust = 'hc1')
+
+# iris_model <- plm(Sepal.Length ~ Sepal.Width + Petal.Length + Species, data = iris, index = 'Species')
+# 
+# summary(iris_model)
+# 
+# coeftest(iris_model,  vcovHC(iris_model, "white1"))
+# 
+
+
+```
+
